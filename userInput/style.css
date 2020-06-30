@@ -1,0 +1,7 @@
+.bg-img { 
+    background-image: url(hf-bg-1.jpg) ;
+    background-position: center center;
+    background-repeat:  no-repeat;
+    background-attachment: fixed;
+    background-size:  cover;
+}

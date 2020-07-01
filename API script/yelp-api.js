@@ -1,26 +1,37 @@
+//updated 6/30/2020
 $(document).ready(function() {
 
-    //YELP API research:
-    //call the API and search through the specific user's input '...search?{parameter1}&{parameter2}&etc...
-    //distance: need to convert the user's geographical location into longitude and latitude in order to determine the search radius
-        //search radius is a int < 40000 meters or 25 miles so need to convert the miles to meters 
-    //price range: price parameter accepts string; i.e. ( "1, 2") will search for businesses with the price range $ and $$
-    //food choice
-    //limit :20 results 
-var radiusMeters = radius * 1609;
-var testLongitude = -122.475420
-var testLatitude = 37.717900
-var foodCategory = "pho"
-//when !category is entered, an error is logged onto console with the value "ERR_NAME_NOT_RESOLVED"
-var price = "$$"
-var radius = 8046.72
-var myurl = "https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?categories=" + foodCategory + "&price" + price + "&latitude=" +testLatitude + "&longitude=" + testLongitude;
+    //Maps API
+    var APIKey = "AIzaSyDViS6l2yCo2AMDS72miisvodhlZn7z9a4"
+    // var queryURL = "https://maps.googleapis.com/maps/api/geocode/json?address={number}+{Street}+{Address},{City}+{Name},+CA&key=" + APIKey;
 
-$.ajax({
+    var mapsURL = "https://maps.googleapis.com/maps/api/geocode/json?address=1600+Amphitheatre+Parkway,+Mountain+View,+CA&sensor=false&key=" + APIKey;
+    $.ajax({
+        url: mapsURL,
+        method: "GET"
+
+    }).then (function(response){
+        console.log(response);
+
+        var longitude = response.results[0].geometry.location.lng;
+        console.log(longitude)
+        var latitude = response.results[0].geometry.location.lat;
+        console.log(latitude)
+    });
+
+    var radiusMeters = radius * 1609;
+    var testLongitude = -122.475420
+    var testLatitude = 37.717900
+    var foodCategory = "pho"
+    //when !category is entered, an error is logged onto console with the value "ERR_NAME_NOT_RESOLVED"
+    var price = "$$"
+    var myurl = "https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?categories=" + foodCategory + "&price" + price + "&latitude=" +testLatitude + "&longitude=" + testLongitude;
+
+    $.ajax({
    url: myurl,
    headers: {
     'Authorization':'Bearer c5M_cqjgsc9TQIIwKOonOb2cSnHENWcFooDQzXUjDUG-ZzmFdMWJZZ4vSggDPtMRZkffTnQrcuVj8ljjhOh8gk86rQXf-gWkQMx5_GOoL27Uf8_O6MU1MER2Qj36XnYx',
-},
+    },
    method: 'GET',
    dataType: 'json',
    success: function(data){

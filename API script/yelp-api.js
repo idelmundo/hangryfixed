@@ -1,4 +1,15 @@
 $(document).ready(function () {
+    
+    //page 2 functionality
+    var userChoices = [];
+
+    $("#saveBtn").on("click", function() {
+        var queryParams = $("#food").val().trim();
+        console.log(queryParams);
+        localStorage.setItem("queryParams", JSON.stringify(queryParams));
+        window.open(href = "../userInput/user-input.html");
+        console.log(queryParams);
+    })
 
     var questionsArr = [
         {q: "How far are you willing to travel (in miles)?", 
@@ -18,7 +29,7 @@ $(document).ready(function () {
     ] 
     
     var currentQuestion = 0;
-    var userChoices = [];
+    
     displayQuestion();
     
     $(".button").on("click", function(){
@@ -31,7 +42,7 @@ $(document).ready(function () {
         }else {
             userChoices.push(userData);
             localStorage.setItem("userChoices", JSON.stringify(userChoices));
-            window.open(href = "user-input.html")
+            window.open(href = "selection.html");
         }
     });
     

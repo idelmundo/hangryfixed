@@ -13,6 +13,8 @@ $(document).ready(function () {
 
     console.log(queryParams);
 
+    
+
     function page3() {
         var questionsArr = [
             {q: "How far are you willing to travel (in miles)?", 

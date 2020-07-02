@@ -1,22 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.0/css/bulma.min.css">
 
-    <title>Yelp-Api test</title>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Page1</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.0/css/bulma.min.css">
+  <!-- bootstrap was needed for autocomplete library from googlemaps-reach goal -->
+  <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+    integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous"> -->
 </head>
+
 <body>
-    <div id="results"></div>
-    <section class="hero">
+  <section class="hero">
     <div class="hero-body">
       <div class="container has-text-centered">
-        
+        <img src=Logo-sm.PNG alt=logo>
       </div>
     </div>
     <div class="container has-text-centered">
-      <p>hangryFixed is a...We just need to ask a few questions to get started</p>
+      <h2>hangryFixed is THE solution to figuring out where to eat. </h2><br>
+        <p>We just need to ask a few questions to get started</p>
       <br>
       <div class="field">
         <label class="address">Enter your address</label>
@@ -33,12 +37,15 @@
   </section>
 
 
+
+
   <script src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
   <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
   <!-- <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
     integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
     crossorigin="anonymous"></script> -->
+    <script src="../API script/config.js"></script>
     <script src="../API script/yelp-api.js"></script>
     <!-- googlemaps library -->
   <!-- <script type="text/javascript"

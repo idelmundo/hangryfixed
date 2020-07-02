@@ -9,12 +9,11 @@ $(document).ready(function () {
     })
     console.log(queryParams);
 
-
-
-
     //page 3 functionality (should we call at the end of page 2 above?)
 
     console.log(queryParams);
+
+    
 
     function page3() {
         var questionsArr = [
@@ -35,16 +34,17 @@ $(document).ready(function () {
         ] 
         console.log(questionsArr[0]);
         console.log("this question is: " + questionsArr[i].q);
+        $("#1").text($("<div>" + questionsArr[0].choice1 + "<div>"));
         for (i = 0; i < questionsArr.length; i++);
         $("#question").append($("<div>" + questionsArr[i].q + "<div>"));
         // console.log(questionsArr[0].choice2)
-        function choices() {
-            if (this.textContent === questionsArr[i].choice1.split("e"));
+        // function choices() {
+        //     if (this.textContent === questionsArr[i].choice1.split("e"));
           
             // $("#page2btn").on("click", function() {
             //     queryParams.category = $("#foodCategory").val().trim();
             
-        }
+        // }
     
         // for (i = 0; i < questionsArr.length; i++)
 
@@ -60,7 +60,11 @@ $(document).ready(function () {
     }
  page3();
 
-})
+
+
+});
+
+
 
 
 

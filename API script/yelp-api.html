@@ -3,14 +3,46 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.0/css/bulma.min.css">
+
     <title>Yelp-Api test</title>
 </head>
 <body>
     <div id="results"></div>
-    <div id="geolocation"></div>
-     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
-    <script src="yelp-api.js"></script>
-    <script src="maps.api.js"></script>
+    <section class="hero">
+    <div class="hero-body">
+      <div class="container has-text-centered">
+        
+      </div>
+    </div>
+    <div class="container has-text-centered">
+      <p>hangryFixed is a...We just need to ask a few questions to get started</p>
+      <br>
+      <div class="field">
+        <label class="address">Enter your address</label>
+        <div class="control">
+          <input class="input is-focused" id="address-input" type="text" placeholder="Your address">
+        </div>
+        <p class="help">We need your address to find restaurants near you</p>
+
+        <a class="button is-danger is-rounded" id="saveBtn">Feeling Hangry?</a>
+      </div>
+    </div>
+
+
+  </section>
+
+
+  <script src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+  <!-- <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+    integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+    crossorigin="anonymous"></script> -->
+    <script src="../API script/yelp-api.js"></script>
+    <!-- googlemaps library -->
+  <!-- <script type="text/javascript"
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDViS6l2yCo2AMDS72miisvodhlZn7z9a4&libraries=places"></script> -->
 </body>
+
 </html>

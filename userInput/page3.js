@@ -31,7 +31,7 @@ $(".button").on("click", function(){
         localStorage.setItem("userChoices", JSON.stringify(userChoices));
     }
 })
-
+//test
 function displayQuestion () {
     $("#question").text(questionsArr[currentQuestion].q);
     $("#choice1").text(questionsArr[currentQuestion].choice1);

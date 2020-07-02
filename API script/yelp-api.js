@@ -10,8 +10,9 @@ $(document).ready(function() {
     var radiusMeters = radius * 1609;
     var testLongitude = -122.475420
     var testLatitude = 37.717900
-    var foodCategory = "filipino"
-        //when !category is entered, an error is logged onto console with the value "ERR_NAME_NOT_RESOLVED"
+    var foodCategory = ["mexican", "filipino"];
+
+    //when !category is entered, an error is logged onto console with the value "ERR_NAME_NOT_RESOLVED"
     var price = "$$"
     var radius = 8046.72
     var myurl = "https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?categories=" + foodCategory + "&price" + price + "&latitude=" + testLatitude + "&longitude=" + testLongitude;
@@ -46,6 +47,8 @@ $(document).ready(function() {
                     var state = item.location.state;
                     var zipcode = item.location.zip_code;
                     var delivery = JSON.stringify(item.transactions[0])
+                    var random = foodCategory[Math.floor(Math.random() * foodCategory.length)]
+                    console.log(random)
                     console.log(delivery)
                         // Append our result into our page
                     $('#results').append('<div id="' + id + '" style="margin-top:50px;margin-bottom:50px;"><img src="' + image + '" style="width:200px;height:150px;"><br>We found <b>' + name + '</b><br>Business ID: ' + id + '<br> Located at: ' + address + ' ' + city + ', ' + state + ' ' + zipcode + '<br>The phone number for this business is: ' + phone + '<br>This business has a rating of ' + rating + ' with ' + reviewcount + ' reviews <br>' + 'This business offers: ' + delivery + '</div>');

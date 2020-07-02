@@ -1,54 +1,90 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Page 7</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.0/css/bulma.min.css">
 </head>
+
 <body>
     <section class="hero">
         <div class="hero-body">
-          <div class="container has-text-centered">
-            <img src=Logo-sm.PNG alt=logo> 
-          </div>
-        </div>  
+            <div class="container has-text-centered">
+                <img src=Logo-sm.PNG alt=logo>
+            </div>
+        </div>
     </section>
     <section>
         <div class="table-container has-text-centered">
             <table class="table_wrapper">
-                <table class = "table is-border restaurants is-fullwidth">
+                <table class="table is-border restaurants is-fullwidth">
                     <thead>
-                    <tbody>
-                        <tr>
-                            <td>
-                                Restaurant
-                            </td>
-                            <td>
-                                Option 1
-                            </td>
-                            <td>
-                                Option 2
-                            </td>
-                            <td>
-                                Option 3
-                            </td>
-                        </tr>      
-                    </tbody>
+                        <button class="button is-info" id="mutombo">More options</button>
+                        <tbody>
+                            <div id="images">
+                            </div>
+                            <tr>
+                                <td>
+                                    Restaurant
+                                </td>
+                                <td>
+                                    Option 1
+                                </td>
+                                <td>
+                                    Option 2
+                                </td>
+                                <td>
+                                    Option 3
+                                </td>
+                            </tr>
+                        </tbody>
                     </thead>
-                </table> 
-              <!-- Your table content -->
+                </table>
             </table>
-          </div>
-          <div>
-              
-          </div>
+        </div>
+        <div>
+        </div>
     </section>
 
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/javascript">
+        //
+        $("#mutombo").on("click", function() { //pointing to the button 
+
+            //
+            var queryURL = "https://api.giphy.com/v1/gifs/random?api_key=wslWpWhssAgYDK6zVXacBDsacT47flr4&tag=mutombo"; //direct to URL
+            console.log(queryURL)
+                //
+            $.ajax({
+                url: queryURL,
+                method: "GET"
+            })
+
+            //
+            .then(function(response) { // will always have THEN without it this will show up 
+
+                //
+                var imageUrl = response.data.image_original_url; // asigning it to what we want to look for 
+
+                //
+                var mutomboImage = $("<img>"); // add img 
+
+                //
+                mutomboImage.attr("src", imageUrl); // add to src 
+                mutomboImage.attr("alt", "mutombo image"); //addin alt "cat img"
+
+                // target  line 11 add in catimage prepan adding to the front & append bottom 
+                $("#images").prepend(mutomboImage);
+            });
+        });
+    </script>
 
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
     <script type="text/javascript" src="userInput.js"></script>
 </body>
+
 </html>

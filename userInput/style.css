@@ -1,7 +1,18 @@
-.bg-img { 
-    background-image: url(hf-bg-1.jpg) ;
-    background-position: center center;
-    background-repeat:  no-repeat;
-    background-attachment: fixed;
-    background-size:  cover;
+.foodPic { 
+  width: 300px;
+  height: 300px;
+}
+
+h1 {
+    padding: 2rem; 
+}
+
+/* .containerFood {
+  width: 200px;
+  height: 120px;
+} */
+
+.table_wrapper {
+    overflow-x: auto;
+    
 }

@@ -1,5 +1,11 @@
 $(document).ready(function() {
-
+    var queryParams = {  }
+    $("#page2btn").on("click", function() {
+        queryParams.category = $("#foodCategory").val().trim();
+    })
+    console.log(queryParams);
+    
+    
     //YELP API research:
     //call the API and search through the specific user's input '...search?{parameter1}&{parameter2}&etc...
     //distance: need to convert the user's geographical location into longitude and latitude in order to determine the search radius
@@ -10,7 +16,7 @@ $(document).ready(function() {
 var radiusMeters = radius * 1609;
 var testLongitude = -122.475420
 var testLatitude = 37.717900
-var foodCategory = "pho"
+// var foodCategory = "pho"
 //when !category is entered, an error is logged onto console with the value "ERR_NAME_NOT_RESOLVED"
 var price = "$$"
 var radius = 8046.72

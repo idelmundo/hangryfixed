@@ -1,11 +1,56 @@
-//updated 6/30/2020
 $(document).ready(function () {
 
+    var questionsArr = [
+        {q: "How far are you willing to travel (in miles)?", 
+            choice1: "1",
+            choice2: "5",
+            choice3: "10",
+            choice4: "15"},
+        {q: "How much to do you want to spend?", 
+            choice1: "$",
+            choice2: "$$",
+            choice3: "$$$",
+            choice4: "$$$$"},
+        {q: "Select your prefered option: ", 
+            choice1: "Delivery",
+            choice2: "Takout",
+            choice3: "Both"},
+    ] 
+    
+    var currentQuestion = 0;
+    var userChoices = [];
+    displayQuestion();
+    
+    $(".button").on("click", function(){
+        var userData = $(this).text();
+        console.log(userData);
+        if (currentQuestion < 2) {
+            userChoices.push(userData);
+            currentQuestion ++;
+            displayQuestion();
+        }else {
+            userChoices.push(userData);
+            localStorage.setItem("userChoices", JSON.stringify(userChoices));
+            window.open(href = "user-input.html")
+        }
+    });
+    
+    function displayQuestion () {
+        $("#question").text(questionsArr[currentQuestion].q);
+        $("#choice1").text(questionsArr[currentQuestion].choice1);
+        $("#choice2").text(questionsArr[currentQuestion].choice2);
+        $("#choice3").text(questionsArr[currentQuestion].choice3);
+        if (currentQuestion <2) {
+        $("#choice4").text(questionsArr[currentQuestion].choice4);
+        }else{
+            $("#choice4").hide();
+        }
+    };
+    
+    //local storage: businesses-information
     function fetchData(address) {
         //Maps API
-        var APIKey = config.GOOGLE_KEY
-        // var queryURL = "https://maps.googleapis.com/maps/api/geocode/json?address={number}+{Street}+{Address},{City}+{Name},+CA&key=" + APIKey;
-
+        var APIKey = "AIzaSyD7kU7_vg6aswMOMvwHXDLYbPSgNs9Am6k"
         var mapsURL = "https://maps.googleapis.com/maps/api/geocode/json?address=" + address + "CA&key=" + APIKey;
         $.ajax({
             url: mapsURL,
@@ -19,24 +64,28 @@ $(document).ready(function () {
             var latitude = response.results[0].geometry.location.lat;
             console.log(latitude)
 
-
-            var radius = radiusMiles * 1609;
-            // var testLongitude = longitude
-            // var testLatitude = latitude
-            var foodCategory = "pho"
+            // var radius = radiusMiles * 1609;
+            var testLongitude = longitude
+            var testLatitude = latitude
+            var foodCategory = ""
             //when !category is entered, an error is logged onto console with the value "ERR_NAME_NOT_RESOLVED"
-            var price = "$$"
-            var myurl = "https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?categories=" + foodCategory + "&radius=" + radius + "&price=" + price + "&latitude=" + testLatitude + "&longitude=" + testLongitude;
+            var price = "2"
+            var myurl = "https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?categories=" + foodCategory +  "&price=" + price + "&latitude=" + testLatitude + "&longitude=" + testLongitude;
 
             $.ajax({
                 url: myurl,
                 headers: {
-                    'Authorization': config.YELP_KEY
+                    'Authorization': "Bearer i3zg_J2QoBX-SpqhxDDk_NlPGNdQ2MzHIu5do6OHocj6Khxl2SznkVmQ-RBdiHH2O3L5WZsS0qnRWcRSEwa5Ler_vTPSDW-wLTINjWhTyoj7hfIj0BhLQ0ySyz79XnYx"
                 },
                 method: 'GET',
                 dataType: 'json',
                 success: function (data) {
                     console.log(data);
+
+                    var businessData = data.businesses
+                    console.log(businessData)
+                    localStorage.setItem("businesses-information", businessData)
+
                     // Itirate through the JSON array of 'businesses' which was returned by the API
                     $.each(data.businesses, function (i, item) {
                         // Store each business's object in a variable
@@ -53,8 +102,6 @@ $(document).ready(function () {
                         var zipcode = item.location.zip_code;
                         var delivery = JSON.stringify(item.transactions[0])
                         //    console.log(delivery)
-                        // Append our result into our page
-                        $('#results').append('<div id="' + id + '" style="margin-top:50px;margin-bottom:50px;"><img src="' + image + '" style="width:200px;height:150px;"><br>We found <b>' + name + '</b><br>Business ID: ' + id + '<br> Located at: ' + address + ' ' + city + ', ' + state + ' ' + zipcode + '<br>The phone number for this business is: ' + phone + '<br>This business has a rating of ' + rating + ' with ' + reviewcount + ' reviews <br>' + 'This business offers: ' + delivery + '</div>');
                     });
                 }
 
@@ -63,18 +110,19 @@ $(document).ready(function () {
         });
 
     };
+
+    //on click will call the apis and also move to the next page
     $("#saveBtn").on("click", function (event) {
+        event.preventDefault();
         function buildUserAdrress() {
-            // var userAddressParams = {};
             var userAddressInput = $("#address-input").val().toLowerCase().split(",");
             console.log(userAddressInput);
-
             var streetAddress = (userAddressInput[0].toLowerCase().split(" "))
-
             return encodeURI(streetAddress);
-
         };
         fetchData(buildUserAdrress())
+  
+        window.open(href = "../userInput/food-category.html")
 
     });
 

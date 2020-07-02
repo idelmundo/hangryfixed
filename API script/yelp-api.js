@@ -1,11 +1,11 @@
 //updated 6/30/2020
 $(document).ready(function () {
 
+    var 
+
     function fetchData(address) {
         //Maps API
         var APIKey = config.GOOGLE_KEY
-        // var queryURL = "https://maps.googleapis.com/maps/api/geocode/json?address={number}+{Street}+{Address},{City}+{Name},+CA&key=" + APIKey;
-
         var mapsURL = "https://maps.googleapis.com/maps/api/geocode/json?address=" + address + "CA&key=" + APIKey;
         $.ajax({
             url: mapsURL,
@@ -18,7 +18,6 @@ $(document).ready(function () {
             console.log(longitude)
             var latitude = response.results[0].geometry.location.lat;
             console.log(latitude)
-
 
             // var radius = radiusMiles * 1609;
             var testLongitude = longitude
@@ -53,8 +52,6 @@ $(document).ready(function () {
                         var zipcode = item.location.zip_code;
                         var delivery = JSON.stringify(item.transactions[0])
                         //    console.log(delivery)
-                        // Append our result into our page
-                        $('#results').append('<div id="' + id + '" style="margin-top:50px;margin-bottom:50px;"><img src="' + image + '" style="width:200px;height:150px;"><br>We found <b>' + name + '</b><br>Business ID: ' + id + '<br> Located at: ' + address + ' ' + city + ', ' + state + ' ' + zipcode + '<br>The phone number for this business is: ' + phone + '<br>This business has a rating of ' + rating + ' with ' + reviewcount + ' reviews <br>' + 'This business offers: ' + delivery + '</div>');
                     });
                 }
 

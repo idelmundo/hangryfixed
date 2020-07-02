@@ -31,6 +31,7 @@ $(document).ready(function () {
         }else {
             userChoices.push(userData);
             localStorage.setItem("userChoices", JSON.stringify(userChoices));
+            window.open(href = "user-input.html")
         }
     });
     
@@ -121,7 +122,7 @@ $(document).ready(function () {
         };
         fetchData(buildUserAdrress())
   
-        window
+        window.open(href = "../userInput/food-category.html")
 
     });
 

@@ -1,5 +1,11 @@
 $(document).ready(function() {
-
+    var queryParams = {  }
+    $("#page2btn").on("click", function() {
+        queryParams.category = $("#foodCategory").val().trim();
+    })
+    console.log(queryParams);
+    
+    
     //YELP API research:
     //call the API and search through the specific user's input '...search?{parameter1}&{parameter2}&etc...
     //distance: need to convert the user's geographical location into longitude and latitude in order to determine the search radius
@@ -7,10 +13,21 @@ $(document).ready(function() {
     //price range: price parameter accepts string; i.e. ( "1, 2") will search for businesses with the price range $ and $$
     //food choice
     //limit :20 results 
+<<<<<<< HEAD
     var radiusMeters = radius * 1609;
     var testLongitude = -122.475420
     var testLatitude = 37.717900
     var foodCategory = ["mexican", "filipino"];
+=======
+var radiusMeters = radius * 1609;
+var testLongitude = -122.475420
+var testLatitude = 37.717900
+// var foodCategory = "pho"
+//when !category is entered, an error is logged onto console with the value "ERR_NAME_NOT_RESOLVED"
+var price = "$$"
+var radius = 8046.72
+var myurl = "https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?categories=" + foodCategory + "&price" + price + "&latitude=" +testLatitude + "&longitude=" + testLongitude;
+>>>>>>> 64067dc683da2d2ae73578f360466abd723934c9
 
     //when !category is entered, an error is logged onto console with the value "ERR_NAME_NOT_RESOLVED"
     var price = "$$"

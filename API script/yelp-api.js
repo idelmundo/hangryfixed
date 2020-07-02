@@ -1,11 +1,9 @@
-//updated 6/30/2020
 $(document).ready(function () {
 
     
-
     function fetchData(address) {
         //Maps API
-        var APIKey = config.GOOGLE_KEY
+        var APIKey = "AIzaSyD7kU7_vg6aswMOMvwHXDLYbPSgNs9Am6k"
         var mapsURL = "https://maps.googleapis.com/maps/api/geocode/json?address=" + address + "CA&key=" + APIKey;
         $.ajax({
             url: mapsURL,
@@ -30,15 +28,21 @@ $(document).ready(function () {
             $.ajax({
                 url: myurl,
                 headers: {
-                    'Authorization': config.YELP_KEY
+                    'Authorization': "Bearer i3zg_J2QoBX-SpqhxDDk_NlPGNdQ2MzHIu5do6OHocj6Khxl2SznkVmQ-RBdiHH2O3L5WZsS0qnRWcRSEwa5Ler_vTPSDW-wLTINjWhTyoj7hfIj0BhLQ0ySyz79XnYx"
                 },
                 method: 'GET',
                 dataType: 'json',
                 success: function (data) {
                     console.log(data);
+
+                    var businessData = data.businesses
+                    console.log(businessData)
+                    localStorage.setItem("businesses-information", businessData)
+
                     // Itirate through the JSON array of 'businesses' which was returned by the API
                     $.each(data.businesses, function (i, item) {
                         // Store each business's object in a variable
+                        console.log(businessData)
                         var id = item.id;
                         //    var alias = item.alias;
                         var phone = item.display_phone;
@@ -69,7 +73,8 @@ $(document).ready(function () {
             return encodeURI(streetAddress);
         };
         fetchData(buildUserAdrress())
-        window.location.assign("../userInput/page2.html");
+  
+        // window.location.assign("../userInput/page2.html");
 
     });
 

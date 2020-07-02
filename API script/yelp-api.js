@@ -1,7 +1,7 @@
 //updated 6/30/2020
 $(document).ready(function () {
 
-    var 
+    
 
     function fetchData(address) {
         //Maps API
@@ -22,7 +22,7 @@ $(document).ready(function () {
             // var radius = radiusMiles * 1609;
             var testLongitude = longitude
             var testLatitude = latitude
-            var foodCategory = "gelato"
+            var foodCategory = ""
             //when !category is entered, an error is logged onto console with the value "ERR_NAME_NOT_RESOLVED"
             var price = "2"
             var myurl = "https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?categories=" + foodCategory +  "&price=" + price + "&latitude=" + testLatitude + "&longitude=" + testLongitude;
@@ -69,7 +69,7 @@ $(document).ready(function () {
             return encodeURI(streetAddress);
         };
         fetchData(buildUserAdrress())
-        // window.location.assign("../userInput/page2.html");
+        window.location.assign("../userInput/page2.html");
 
     });
 

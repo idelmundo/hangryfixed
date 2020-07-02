@@ -29,9 +29,10 @@ $(".button").on("click", function(){
     }else {
         userChoices.push(userData);
         localStorage.setItem("userChoices", JSON.stringify(userChoices));
+        window.open(href = "page6.html");
     }
 })
-//test
+
 function displayQuestion () {
     $("#question").text(questionsArr[currentQuestion].q);
     $("#choice1").text(questionsArr[currentQuestion].choice1);
@@ -41,5 +42,8 @@ function displayQuestion () {
     $("#choice4").text(questionsArr[currentQuestion].choice4);
     }else{
         $("#choice4").hide();
-    }
+    } 
+    
 }
+
+

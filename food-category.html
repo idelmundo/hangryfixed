@@ -1,17 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Choose your food group!</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.0/css/bulma.min.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Choose your food group!</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.0/css/bulma.min.css">
+  <link rel='stylesheet' href='popbox.css' type='text/css'>
+ 
 </head>
+
 <body>
   <section class="hero">
     <div class="hero-body">
-        <div class="container has-text-centered">
-          <img src=userInput/Logo-sm.PNG alt=logo> 
-        </div>
+      <div class="container has-text-centered">
+        <img src=userInput/Logo-sm.PNG alt=logo>
+      </div>
     </div>
     <div class="container has-text-centered">
       <div class="field">
@@ -21,15 +25,39 @@
           <input class="input is-focused" id="food" type="text" placeholder="tacos">
         </div>
         <br>
+        <div class='popbox'>
+          <a class='open' href='#'>Click Here!</a>
+      
+          <div class='collapse'>
+            <div class='box'>
+              <div class='arrow'></div>
+              <div class='arrow-border'></div>
+        
+              Content in PopBox goes here :)
+        
+              <a href="#" class="close">close</a>
+            </div>
+          </div>
+        </div>
+      
+        <br></br>
         <a class="button is-danger is-rounded" id="foodCategoryBtn">Let's go!</a>
       </div>
     </div>
   </section>
+
+
+  <script src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+  <script src="api.js"></script>
+  <script type='text/javascript' charset='utf-8' src='jquery.js'></script>
+
+  <script type='text/javascript' charset='utf-8' src='popbox.js'></script>
+
+
   
-  
-    <script src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
-    <script src="api.js"></script>
+
 </body>
+
 </html>

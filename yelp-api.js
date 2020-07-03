@@ -131,6 +131,15 @@ $(document).ready(function() {
             });
 
         };
+        // Isaias
+
+        // Retrieve the object from storage
+        localStorage.getItem("businesses-information");
+        var nameOfplace = localStorage.getItem("item.name")
+        var addressOfplace = localStorage.getItem("item.location.address1");
+        var imageOfplace = localStorage.getItem("item.image_url");
+
+        // Isaias
 
         //on click will call the apis and also move to the next page
         $("#saveBtn").on("click", function(event) {
@@ -163,8 +172,7 @@ $(document).ready(function() {
     var myurl = "https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?categories=" + foodCategory + "&price" + price + "&latitude=" + testLatitude + "&longitude=" + testLongitude;
 
     var longitude = response.results[0].geometry.location.lng;
-    console.log(longitude)
-    var latitude = response.results[0].geometry.location.lat;
+    console.log(longitude) var latitude = response.results[0].geometry.location.lat;
     console.log(latitude)
 
 

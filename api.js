@@ -8,6 +8,9 @@ $(document).ready(function () {
         event.preventDefault();
         function buildUserAdrress() {
             var userAddressInput = $("#address-input").val().toLowerCase().split(",");
+            if (userAddressInput === ""){
+                
+            }
             console.log(userAddressInput);
             var streetAddress = (userAddressInput[0].toLowerCase().split(" "));
             return encodeURI(streetAddress);

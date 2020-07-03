@@ -31,7 +31,7 @@ $(document).ready(function () {
     $("#foodCategoryBtn").on("click", function () {
         // foodCategory = $("#food").val().trim();
 
-        localStorage.setItem("foodCategory", JSON.stringify( $("#food").val().trim()));
+        localStorage.setItem("foodCategory", JSON.stringify($("#food").val().trim()));
         // var test = localStorage.getItem("foodCategory");
 
         window.open(href = "user-input.html")
@@ -55,7 +55,7 @@ $(document).ready(function () {
         {
             q: "Select your prefered option: ",
             choice1: "Delivery",
-            choice2: "Takout",
+            choice2: "Takeout",
             choice3: "Both"
         },
     ]
@@ -76,6 +76,7 @@ $(document).ready(function () {
             userChoices.push(userData);
             localStorage.setItem("userChoices", JSON.stringify(userChoices));
             window.open(href = "userInput/selection.html")
+            getBusinessInfo()
         }
     });
 
@@ -117,79 +118,81 @@ $(document).ready(function () {
         });
     };
 
-    // var radius = radiusMiles * 1609;
-    var userGeolocation = JSON.parse(localStorage.getItem("user-geolocation"));
-    // console.log(userGeolocation);
+     //stored business information into local storage call business-information
+    function getBusinessInfo() {
+        // var radius = radiusMiles * 1609;
+        var userGeolocation = JSON.parse(localStorage.getItem("user-geolocation"));
+        // console.log(userGeolocation);
+        var longitude = userGeolocation.longitude;
+        // console.log(longitude);
+        var latitude = userGeolocation.latitude;
+        // console.log(latitude)
+        var foodCategory = localStorage.getItem("foodCategory");
+        // console.log(foodCategory)
+        //when !category is entered, an error is logged onto console with the value "ERR_NAME_NOT_RESOLVED"
+        var userInputSaved = JSON.parse(localStorage.getItem("userChoices"))
+        // console.log(userInputSaved)
+        var radius = parseInt(userInputSaved[0]) * 1609;
+        // console.log(radius)
+        var price = 0;
+        //this function convert the $ symbol into an integer
+        function convertPrice() {
+            var pricein$ = userInputSaved[1];
+            if (pricein$ === "$") {
+                price = 1;
+            } else if (pricein$ === "$$") {
+                price = 2;
+            } else if (pricein$ === "$$$") {
+                price = 3;
+            } else {
+                price = 4;
+            }
+        };
+        convertPrice()
+        // console.log(price);
 
-    var longitude = userGeolocation.longitude;
-    // console.log(longitude);
+        var deliveryOptions = userInputSaved[2];
+        console.log(deliveryOptions)
 
-    var latitude = userGeolocation.latitude;
-    // console.log(latitude)
+        var myurl = "https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?latitude=" + latitude + "&longitude=" + longitude + "&categories=" + foodCategory + "&price=" + price + "&radius=" + radius;
 
-    var foodCategory = localStorage.getItem("foodCategory");
-    // console.log(foodCategory)
-    //when !category is entered, an error is logged onto console with the value "ERR_NAME_NOT_RESOLVED"
-    var userInputSaved = JSON.parse(localStorage.getItem("userChoices"))
-    // console.log(userInputSaved)
+        $.ajax({
+            url: myurl,
+            headers: {
+                'Authorization': "Bearer i3zg_J2QoBX-SpqhxDDk_NlPGNdQ2MzHIu5do6OHocj6Khxl2SznkVmQ-RBdiHH2O3L5WZsS0qnRWcRSEwa5Ler_vTPSDW-wLTINjWhTyoj7hfIj0BhLQ0ySyz79XnYx"
+            },
+            method: 'GET',
+            dataType: 'json',
+            success: function (data) {
+                console.log(data);
+                localStorage.setItem("business-information", JSON.stringify(data.businesses));
 
-    var radius = parseInt(userInputSaved[0]) * 1609;
-    // console.log(radius)
+                //     var businessData = data.businesses
+                //     console.log(businessData)
+                //     localStorage.setItem("businesses-information", businessData)
 
-    var price = 0;
-    function convertPrice(){
-        var pricein$ = userInputSaved[1];
-        if (pricein$ === "$"){
-            price = 1;
-        } else if (pricein$ === "$$") {
-            price = 2;
-        } else if (pricein$ === "$$$") {
-            price = 3;
-        } else {
-            price = 4;
-        }  
-    };
-    convertPrice()
-    // console.log(price);
-    
-    // var myurl = "https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?categories=" + foodCategory + "&price=" + price + "&latitude=" + testLatitude + "&longitude=" + testLongitude;
+                //     // Itirate through the JSON array of 'businesses' which was returned by the API
+                //     $.each(data.businesses, function (i, item) {
+                //         // Store each business's object in a variable
+                //         var id = item.id;
+                //         //    var alias = item.alias;
+                //         var phone = item.display_phone;
+                //         var image = item.image_url;
+                //         var name = item.name;
+                //         var rating = item.rating;
+                //         var reviewcount = item.review_count;
+                //         var address = item.location.address1;
+                //         var city = item.location.city;
+                //         var state = item.location.state;
+                //         var zipcode = item.location.zip_code;
+                //         var delivery = JSON.stringify(item.transactions[0])
+                //         //    console.log(delivery)
+                //     });
+            }
 
-    // $.ajax({
-    //     url: myurl,
-    //     headers: {
-    //         'Authorization': "Bearer i3zg_J2QoBX-SpqhxDDk_NlPGNdQ2MzHIu5do6OHocj6Khxl2SznkVmQ-RBdiHH2O3L5WZsS0qnRWcRSEwa5Ler_vTPSDW-wLTINjWhTyoj7hfIj0BhLQ0ySyz79XnYx"
-    //     },
-    //     method: 'GET',
-    //     dataType: 'json',
-    //     success: function (data) {
-    //         console.log(data);
+        });
 
-    //         var businessData = data.businesses
-    //         console.log(businessData)
-    //         localStorage.setItem("businesses-information", businessData)
-
-    //         // Itirate through the JSON array of 'businesses' which was returned by the API
-    //         $.each(data.businesses, function (i, item) {
-    //             // Store each business's object in a variable
-    //             var id = item.id;
-    //             //    var alias = item.alias;
-    //             var phone = item.display_phone;
-    //             var image = item.image_url;
-    //             var name = item.name;
-    //             var rating = item.rating;
-    //             var reviewcount = item.review_count;
-    //             var address = item.location.address1;
-    //             var city = item.location.city;
-    //             var state = item.location.state;
-    //             var zipcode = item.location.zip_code;
-    //             var delivery = JSON.stringify(item.transactions[0])
-    //             //    console.log(delivery)
-    //         });
-    //     }
-
-    // });
-
-
+    }
 
 });
 

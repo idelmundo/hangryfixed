@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Page 3</title>
+    <title>Tell us more!</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.0/css/bulma.min.css">
 </head>
 <body>
     <section class="hero">
         <div class="hero-body">
           <div class="container has-text-centered">
-            <img src=Logo-sm.PNG alt=logo> 
+            <img src=userInput/Logo-sm.PNG alt=logo> 
           </div>
         </div>  
     </section>
@@ -26,22 +26,22 @@
                 <div class="choice-container">
                     <p class="choice-prefix"></p>
                     <!--do we need choice prefix class? -->
-                    <button class="button is-info" data-number="1">Choice 1</button>
+                    <button class="button is-info" id="choice1" data-number="1">Choice 1</button>
                     <!-- <p class="choice-text" data-number="1">Choice 1</p> -->
                 </div></br>
                 <div class="choice-container">
                     <p class="choice-prefix"></p>
-                    <button class="button is-info" data-number="2">Choice 2</button>
+                    <button class="button is-info" id="choice2" data-number="2">Choice 2</button>
                     <!-- <p class="choice-text" data-number="2">Choice 2</p> -->
                 </div></br>
                 <div class="choice-container">
                     <p class="choice-prefix"></p>
-                    <button class="button is-info" data-number="3">Choice 3</button>
+                    <button class="button is-info" id="choice3" data-number="3">Choice 3</button>
                     <!-- <p class="choice-text" data-number="3">Choice 3</p> -->
                 </div></br>
                 <div class="choice-container">
                     <p class="choice-prefix"></p>
-                    <button class="button is-info" data-number="4">Choice 4</button>
+                    <button class="button is-info" id="choice4" data-number="4">Choice 4</button>
                     <!-- <p class="choice-text" data-number="4">Choice 4</p> -->
                 </div>
             </div>
@@ -52,5 +52,8 @@
 
 
     <script src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+    <script src="api.js"></script>
 </body>
 </html>

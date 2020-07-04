@@ -14,11 +14,10 @@ h1 {
 
 .table_wrapper {
     overflow-x: auto;
-    
 }
 
 body, html {
-  background-color: #FBFAE6;
+  /* background-color: #FBFAE6; */
   height: 100%;
   background-size: cover;
   font-family: 'Teko', sans-serif;
@@ -27,7 +26,6 @@ body, html {
 }
 
 .bg {
-  background-color: #FBFAE6;
   height: 100%;
   background-size: cover;
 }
@@ -57,5 +55,9 @@ body, html {
 .hero-body {
   margin-bottom: 0px;
   margin-top: 0px;
-  padding: 0px;
+  padding-bottom: 0px;
+}
+
+img {
+  border: .5rem solid black;
 }

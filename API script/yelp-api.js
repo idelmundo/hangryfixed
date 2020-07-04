@@ -12,7 +12,7 @@ $(document).ready(function () {
     })
 
     var questionsArr = [
-        {q: "How far are you willing to travel (in miles)?", 
+        {q: "How many miles are you willing to travel?", 
             choice1: "1",
             choice2: "5",
             choice3: "10",
@@ -24,7 +24,7 @@ $(document).ready(function () {
             choice4: "$$$$"},
         {q: "Select your prefered option: ", 
             choice1: "Delivery",
-            choice2: "Takout",
+            choice2: "Takeout",
             choice3: "Both"},
     ] 
     

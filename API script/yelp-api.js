@@ -43,6 +43,7 @@ $(document).ready(function () {
             userChoices.push(userData);
             localStorage.setItem("userChoices", JSON.stringify(userChoices));
             window.open(href = "selection.html");
+            window.close();
         }
     });
     

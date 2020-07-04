@@ -17,8 +17,19 @@ h1 {
     
 }
 
-body {
+body, html {
   background-color: #FBFAE6;
+  height: 100%;
+  background-size: cover;
+  font-family: 'Teko', sans-serif;
+  font-size: 28px;
+  margin: 0;
+}
+
+.bg {
+  background-color: #FBFAE6;
+  height: 100%;
+  background-size: cover;
 }
 
 .choice-container {
@@ -37,4 +48,14 @@ body {
 .ancestor {
   margin-left: 30px;
   margin-right: 30px;
+}
+
+.help {
+  font-size: 20px;
+}
+
+.hero-body {
+  margin-bottom: 0px;
+  margin-top: 0px;
+  padding: 0px;
 }

@@ -17,18 +17,20 @@ h1 {
 }
 
 body, html {
-  /* background-color: #FBFAE6; */
+  background-color: #342628;
   height: 100%;
   background-size: cover;
   font-family: 'Teko', sans-serif;
   font-size: 28px;
   margin: 0;
+  color: #FEAA00;
+  /* color: #FBFAE6; */
 }
 
-.bg {
+/* .bg {
   height: 100%;
   background-size: cover;
-}
+} */
 
 .choice-container {
   padding: 5px;
@@ -59,5 +61,10 @@ body, html {
 }
 
 img {
-  border: .5rem solid black;
+  border: .25rem solid black;
+}
+
+.button {
+  background-color: #FD8D6E;
+  color:  white;
 }

@@ -1,45 +1,79 @@
-$(document).ready(function () {
-
+$(document).ready(function () {    
     //this onclick event does the following: 
     //build user'address into a var for the googleAPI and will return a coordinate
     //store the user's geolocation into local storage
     //move to the next page; food-category
+
     $("#feelingHangryBtn").on("click", function (event) {
         event.preventDefault();
         var userAddressInput = $("#address-input").val().toLowerCase().split(",");
         console.log(userAddressInput);
-        function buildUserAdrress() {
+        validateForm();
 
-            return encodeURI(userAddressInput);
+        function validateForm() {
+            if (userAddressInput == "") {
+                swal({
+                    icon: "error",
+                    text: "Please enter an address, even the city will work!",
+                    button: "Ok"
+                });
+                return false;
+            }
+            else {
+                buildUserAdrress()
+                fetchLocation(buildUserAdrress())
+                window.open(href = "food-category.html");
+
+            };
         };
-        if (userAddressInput === null) {
-            alert("please enter an address")
-        } else {
-            fetchLocation(buildUserAdrress())
-            window.open(href = "food-category.html");
 
-        }
+        function buildUserAdrress() {
+            return encodeURI(userAddressInput)
+        };
 
     });
 
-//userChoicesCategory stores the food category
-var foodCategory = [];
+    //userChoicesCategory stores the food category
+    var foodCategory = [];
 
-//userChoices store the options
-var userChoices = [];
+    //userChoices store the options
+    var userChoices = [];
 
-//this on-click event will update and store the user's food category in local storage under the object userChoices
-//the click will also direct to next pg user-input.html
-$("#foodCategoryBtn").on("click", function () {
-    // foodCategory = $("#food").val().trim();
+    //this on-click event will update and store the user's food category in local storage under the object userChoices
+    //the click will also direct to next pg user-input.html
+    $("#foodCategoryBtn").on("click", function () {
+        // foodCategory = $("#food").val().trim();
 
-    localStorage.setItem("foodCategory", JSON.stringify($("#food").val().trim()));
-    // var test = localStorage.getItem("foodCategory");
+        localStorage.setItem("foodCategory", JSON.stringify($("#food").val().trim()));
+        var test = localStorage.getItem("foodCategory");
+        console.log(test)
+        window.open(href = "user-input.html")
 
-    window.open(href = "user-input.html")
-});
+        // swal({
+        //     icon: "warning",
+        //     className: "red-bg",
+        //     text: "Once you press this button, you are legally bound to go to the restaurant that we picked",
+        //     confirm: {
+        //         text: "OK",
+        //         value: "true",
+        //         visible: "true",
+        //         className: "confirmEntry",
+        //         closeModal: "true"
+        //     },
+        //     cancel: {
+        //         text: "Nope. Too much commitment",
+        //         value: null,
+        //         visible: false,
+        //         className: "denyEntry",
+        //         cloaseModal: true
 
-var questionsArr = [
+        //     }
+        // });
+
+    });
+
+
+    var questionsArr = [
     {
         q: "How far are you willing to travel ?",
         choice1: "1 mile",
@@ -60,13 +94,13 @@ var questionsArr = [
         choice2: "Takeout",
         choice3: "Both"
     },
-]
+    ]
 
-var currentQuestion = 0;
-displayQuestion();
+    var currentQuestion = 0;
+    displayQuestion();
 
-//ask and store the options in local storage userChoices
-$(".button").on("click", function () {
+    //ask and store the options in local storage userChoices
+    $(".button").on("click", function () {
     var userData = $(this).text();
     console.log(userData);
 
@@ -80,9 +114,9 @@ $(".button").on("click", function () {
         window.open(href = "userInput/selection.html")
         getBusinessInfo()
     }
-});
+    });
 
-function displayQuestion() {
+    function displayQuestion() {
     $("#question").text(questionsArr[currentQuestion].q);
     $("#choice1").text(questionsArr[currentQuestion].choice1);
     $("#choice2").text(questionsArr[currentQuestion].choice2);
@@ -92,7 +126,7 @@ function displayQuestion() {
     } else {
         $("#choice4").hide();
     }
-};
+}   ;
 
 
 //the ajax call to maps to retrive geolocation
@@ -107,10 +141,13 @@ function fetchLocation(address) {
 
     }).then(function (response) {
         console.log(response);
-        if(response.status !== "OK"){
-            alert("can't find address")
-        }
-
+        if (response.status !== "OK") {
+            swal({
+                icon: "error",
+                text: "Seems like the address you entered doesn't exist. Please try again",
+                button: "Ok"
+            })
+        } else {
         var longitude = response.results[0].geometry.location.lng;
         // console.log(longitude)
         geolocation.longitude = longitude;
@@ -118,8 +155,8 @@ function fetchLocation(address) {
         // console.log(latitude)
         geolocation.latitude = latitude;
         // console.log(geolocation);
-
         localStorage.setItem("user-geolocation", JSON.stringify(geolocation));
+        };
     });
 };
 
@@ -172,32 +209,11 @@ function getBusinessInfo() {
             console.log(data);
             localStorage.setItem("business-information", JSON.stringify(data.businesses));
 
-            //     var businessData = data.businesses
-            //     console.log(businessData)
-            //     localStorage.setItem("businesses-information", businessData)
-
-            //     // Itirate through the JSON array of 'businesses' which was returned by the API
-            //     $.each(data.businesses, function (i, item) {
-            //         // Store each business's object in a variable
-            //         var id = item.id;
-            //         //    var alias = item.alias;
-            //         var phone = item.display_phone;
-            //         var image = item.image_url;
-            //         var name = item.name;
-            //         var rating = item.rating;
-            //         var reviewcount = item.review_count;
-            //         var address = item.location.address1;
-            //         var city = item.location.city;
-            //         var state = item.location.state;
-            //         var zipcode = item.location.zip_code;
-            //         var delivery = JSON.stringify(item.transactions[0])
-            //         //    console.log(delivery)
-            //     });
         }
 
     });
 
-}
+    };
+
 
 });
-

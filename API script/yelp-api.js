@@ -1,7 +1,18 @@
 $(document).ready(function () {
+    
+    //page 2 functionality
+    var userChoices = [];
+
+    $("#saveBtn").on("click", function() {
+        var queryParams = $("#food").val().trim();
+        console.log(queryParams);
+        localStorage.setItem("queryParams", JSON.stringify(queryParams));
+        window.open(href = "../userInput/user-input.html");
+        console.log(queryParams);
+    })
 
     var questionsArr = [
-        {q: "How far are you willing to travel (in miles)?", 
+        {q: "How many miles are you willing to travel?", 
             choice1: "1",
             choice2: "5",
             choice3: "10",
@@ -13,12 +24,12 @@ $(document).ready(function () {
             choice4: "$$$$"},
         {q: "Select your prefered option: ", 
             choice1: "Delivery",
-            choice2: "Takout",
+            choice2: "Takeout",
             choice3: "Both"},
     ] 
     
     var currentQuestion = 0;
-    var userChoices = [];
+    
     displayQuestion();
     
     $(".button").on("click", function(){
@@ -31,7 +42,8 @@ $(document).ready(function () {
         }else {
             userChoices.push(userData);
             localStorage.setItem("userChoices", JSON.stringify(userChoices));
-            window.open(href = "user-input.html")
+            window.open(href = "selection.html");
+            window.close();
         }
     });
     

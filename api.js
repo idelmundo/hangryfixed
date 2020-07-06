@@ -218,30 +218,31 @@ $(document).ready(function() {
 
     $(".delivery").append(randomRestaurant.transactions)
 
-    $(".image").append($("<img>").attr("src", randomRestaurant.image_url))
+    $(".restImage").append($("<img>").attr("src", randomRestaurant.image_url))
+
 
     var businessList = [businessInfoArray[0], businessInfoArray[1], businessInfoArray[2]]
 
 
-    var table = new Tabulator("#food-table", {
-        data: businessList,
-        reactiveDate: true,
-        height: "311px",
-        layout: "fitDataTable",
-        columns: [
-            { title: "Name", field: "name" },
-            { title: "Phone #", field: "display_phone" },
-            { title: "Address", field: "location.display_address" },
-            { title: "Rating", field: "rating" },
-            { title: "Price", field: "price" }
-
-        ]
-    });
 
     $("#option").on("click", function() { //pointing to the button 
         var queryURL = "https://api.giphy.com/v1/gifs/random?api_key=wslWpWhssAgYDK6zVXacBDsacT47flr4&tag=mutombo"; //direct to URL
         console.log(queryURL)
-        $("#food-table").append(table)
+
+        var table = new Tabulator("#food-table", {
+            data: businessList,
+            reactiveDate: true,
+            height: "311px",
+            layout: "fitDataTable",
+            columns: [
+                { title: "Name", field: "name" },
+                { title: "Phone #", field: "display_phone" },
+                { title: "Address", field: "location.display_address" },
+                { title: "Rating", field: "rating" },
+                { title: "Price", field: "price" }
+
+            ]
+        });
 
         $.ajax({
                 url: queryURL,
@@ -252,23 +253,26 @@ $(document).ready(function() {
                 var mutomboImage = $("<img>");
                 mutomboImage.attr("src", imageUrl);
                 mutomboImage.attr("alt", "mutombo image");
-                $("#name").text("name")
-                $("#location").text("location")
-                $("#phone").text("Phone")
-                $("#images").prepend(mutomboImage);
-                // $("#myTable").append(businessName);
-                // $("#myTable").append(businessAddress);
-                // $("#myTable").append(businessPhone);
-                // var businessInfoArray = JSON.parse(localStorage.getItem("business-information"))
-            });
 
+                $("#images").prepend(mutomboImage);
+
+                setTimeout(function() {
+                    mutomboImage.remove()
+                }, 3000);
+
+                // var businessInfoArray = JSON.parse(localStorage.getItem("business-information"))
+                var businessMap = randomRestaurant.coordinates.latitude;
+
+                var businessMap2 = bandomRestaurant.coordinates.longitude;
+                // $(".lMap").append(businessMap);
+                // $(".lMap2").append(businessMap2);
+            });
+        console.log(businessMap)
     });
 
+    var businessMap = randomRestaurant.coordinates.latitude;
 
-
-
-    businessMap = businessInfoArray[i].coordinates.latitude;
-    businessMap2 = businessInfoArray[i].coordinates.longitude;
+    var businessMap2 = randomRestaurant.coordinates.longitude;
 
 
     $(".lMap").append(businessMap);
@@ -276,17 +280,20 @@ $(document).ready(function() {
 
 
     L.mapquest.key = 'vuIBY9eRy3TwF0eJSyhT4gJWCEQSAB5m';
-    L.mapquest.map('map', {
+    var food = L.mapquest.map('map', {
         center: [businessMap, businessMap2],
         layers: L.mapquest.tileLayer("map"),
         zoom: 12,
     });
+    console.log(businessMap)
+    console.log(businessMap2)
+
     // add a marker if possible.
 
-    $("#map").append(L.mapquest);
+    $("#map").append(food);
 
-    $(".lMap").hide();
-    $(".lMap2").hide();
+    // $(".lMap").hide();
+    // $(".lMap2").hide();
 
     // console.log(L.marker)
 });

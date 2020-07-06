@@ -9,6 +9,7 @@
     <link type="text/css" rel="stylesheet" href="https://api.mqcdn.com/sdk/mapquest-js/v1.3.2/mapquest.css" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.0/css/bulma.min.css">
     <link rel="stylesheet" href="style.css">
+    <link href="tabulator/css/bulma/tabulator_bulma.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Teko&display=swap" rel="stylesheet">
 </head>
 
@@ -32,9 +33,11 @@
                             <article class="tile is-child notification is-primary">
                                 <p class="title">You'll go here</p>
                                 <p class="name">Name of restaurant: </p>
+                                <p class="price">Price: </p>
                                 <p class="phone">Phone number: </p>
                                 <p class="location">Location: </p>
                                 <p class="rating">Rating: </p>
+                                <p class="delivery">This restaurant offers: </p>
                                 <p class=lMap>What</p>
                                 <p class=lMap2>What2</p>
                             </article>
@@ -56,48 +59,20 @@
                             <div class="content">
                                 <button id=option class="button is-info is-rounded ">Other option</button>
                             </div>
-
                         </div>
                     </article>
                 </div>
+
             </div>
-        </div>
-        <div class="tile is-parent is-12">
-            <article class="tile is-child">
-                <p class="title"></p>
-                <p class="subtitle"></p>
-                <div class="content">
-                    <div id=images></div>
-                    <table id="myTable">
-                        <tr>
-                            <th id="names"></th>
-                            <th id="location"></th>
-                            <th id="phone"></th>
-                        </tr>
-                        <tr>
-                            <td class="names"></td>
-                            <td class="locations"></td>
-                            <td class="phones"></td>
-                        </tr>
-                        <tr>
-                            <td class="names2"></td>
-                            <td class="locations2"></td>
-                            <td class="phones2"></td>
-                        </tr>
-                        <tr>
-                            <td class="names3"></td>
-                            <td class="locations3"></td>
-                            <td class="phones3"></td>
-                        </tr>
-                    </table>
-                </div>
-            </article>
-        </div>
-    </section>
-    <script src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
-    <script src="api.js"></script>
+            <div class="tile is-vertical is-parent is-8 ">
+                <div id="food-table"></div>
+            </div>
+
+            <script src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+            <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+            <script type="text/javascript" src="tabulator/js/tabulator.min.js"></script>
+            <script src="api.js"></script>
 
 
 </body>

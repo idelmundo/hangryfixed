@@ -10,6 +10,10 @@ $(document).ready(function() {
         console.log(userAddressInput);
         validateForm();
 
+        function buildUserAdrress() {
+            return encodeURI(userAddressInput)
+        };
+
         function validateForm() {
             if (userAddressInput == "") {
                 swal({
@@ -31,9 +35,7 @@ $(document).ready(function() {
 
         // window.open(href = "food-category.html");
         // window.close();
-        function buildUserAdrress() {
-            return encodeURI(userAddressInput)
-        };
+
 
     });
 
@@ -201,23 +203,74 @@ $(document).ready(function() {
     var businessInfoArray = JSON.parse(localStorage.getItem("business-information"))
     console.log(businessInfoArray);
     // console.log(businessInfoArray[0].image_url)
-    var random = businessInfoArray[Math.floor(Math.random() * 11)]
-    console.log(random)
+    var randomRestaurant = businessInfoArray[Math.floor(Math.random() * 11)]
+    console.log(randomRestaurant)
 
-    for (var i = 0; i < 10; i++) {
-        businessName = businessInfoArray[i].name;
-        businessPhone = businessInfoArray[i].display_phone;
-        businessAddress = businessInfoArray[i].location.display_address;
-        businessImg = businessInfoArray[i].image_url;
-        businessRating = businessInfoArray[i].rating;
-        businessMap = businessInfoArray[i].coordinates.latitude;
-        businessMap2 = businessInfoArray[i].coordinates.longitude;
-    }
-    $(".name").append(businessName);
-    $(".image").append($("<img>").attr("src", businessImg))
-    $(".location").append(businessAddress);
-    $(".phone").append(businessPhone);
-    $(".rating").append(businessRating);
+    $(".name").append(randomRestaurant.name);
+
+    $(".price").append(randomRestaurant.price);
+
+    $(".phone").append(randomRestaurant.display_phone);
+
+    $(".location").append(randomRestaurant.location);
+
+    $(".rating").append(randomRestaurant.rating);
+
+    $(".delivery").append(randomRestaurant.transactions)
+
+    $(".image").append($("<img>").attr("src", randomRestaurant.image_url))
+
+    var businessList = [businessInfoArray[0], businessInfoArray[1], businessInfoArray[2]]
+
+
+    var table = new Tabulator("#food-table", {
+        data: businessList,
+        reactiveDate: true,
+        height: "311px",
+        layout: "fitDataTable",
+        columns: [
+            { title: "Name", field: "name" },
+            { title: "Phone #", field: "display_phone" },
+            { title: "Address", field: "location.display_address" },
+            { title: "Rating", field: "rating" },
+            { title: "Price", field: "price" }
+
+        ]
+    });
+
+    $("#option").on("click", function() { //pointing to the button 
+        var queryURL = "https://api.giphy.com/v1/gifs/random?api_key=wslWpWhssAgYDK6zVXacBDsacT47flr4&tag=mutombo"; //direct to URL
+        console.log(queryURL)
+        $("#food-table").append(table)
+
+        $.ajax({
+                url: queryURL,
+                method: "GET"
+            })
+            .then(function(response) {
+                var imageUrl = response.data.image_original_url;
+                var mutomboImage = $("<img>");
+                mutomboImage.attr("src", imageUrl);
+                mutomboImage.attr("alt", "mutombo image");
+                $("#name").text("name")
+                $("#location").text("location")
+                $("#phone").text("Phone")
+                $("#images").prepend(mutomboImage);
+                // $("#myTable").append(businessName);
+                // $("#myTable").append(businessAddress);
+                // $("#myTable").append(businessPhone);
+                // var businessInfoArray = JSON.parse(localStorage.getItem("business-information"))
+            });
+
+    });
+
+
+
+
+    businessMap = businessInfoArray[i].coordinates.latitude;
+    businessMap2 = businessInfoArray[i].coordinates.longitude;
+
+
     $(".lMap").append(businessMap);
     $(".lMap2").append(businessMap2);
 
@@ -236,28 +289,4 @@ $(document).ready(function() {
     $(".lMap2").hide();
 
     // console.log(L.marker)
-});
-
-$("#option").on("click", function() { //pointing to the button 
-    var queryURL = "https://api.giphy.com/v1/gifs/random?api_key=wslWpWhssAgYDK6zVXacBDsacT47flr4&tag=mutombo"; //direct to URL
-    console.log(queryURL)
-    $.ajax({
-            url: queryURL,
-            method: "GET"
-        })
-        .then(function(response) {
-            var imageUrl = response.data.image_original_url;
-            var mutomboImage = $("<img>");
-            mutomboImage.attr("src", imageUrl);
-            mutomboImage.attr("alt", "mutombo image");
-            $("#name").text("name")
-            $("#location").text("location")
-            $("#phone").text("Phone")
-            $("#images").prepend(mutomboImage);
-            // $("#myTable").append(businessName);
-            // $("#myTable").append(businessAddress);
-            // $("#myTable").append(businessPhone);
-            var businessInfoArray = JSON.parse(localStorage.getItem("business-information"))
-        });
-
 });

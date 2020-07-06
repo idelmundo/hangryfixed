@@ -21,6 +21,7 @@ $(document).ready(function () {
 
 
         window.open(href = "food-category.html");
+        window.close();
 
     });
     //userChoicesCategory stores the food category
@@ -38,6 +39,7 @@ $(document).ready(function () {
         // var test = localStorage.getItem("foodCategory");
 
         window.open(href = "user-input.html")
+        window.close();
     });
 
     var questionsArr = [
@@ -80,6 +82,7 @@ $(document).ready(function () {
             localStorage.setItem("userChoices", JSON.stringify(userChoices));
             window.open(href = "userInput/selection.html")
             getBusinessInfo()
+            
         }
     });
 

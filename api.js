@@ -4,6 +4,20 @@ $(document).ready(function () {
     //store the user's geolocation into local storage
     //move to the next page; food-category
 
+    var table = new Tabulator("#example-table", {
+        height:"311px",
+    columns:[
+    {title:"Name", field:"name"},
+    {title:"Progress", field:"progress", hozAlign:"right", sorter:"number"},
+    {title:"Gender", field:"gender"},
+    {title:"Rating", field:"rating", hozAlign:"center"},
+    {title:"Favourite Color", field:"col"},
+    {title:"Date Of Birth", field:"dob", hozAlign:"center", sorter:"date"},
+    {title:"Driver", field:"car", hozAlign:"center"},
+    ],
+});
+    $("example-table").append(table)
+
     $("#feelingHangryBtn").on("click", function (event) {
         event.preventDefault();
         var userAddressInput = $("#address-input").val().toLowerCase().split(",");

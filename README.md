@@ -34,6 +34,8 @@ Below are the prerequisite understanding and programs that were utilized :
 * Yelp API- click [here](https://www.yelp.com/developers/documentation/v3)
 
 * Googlemaps API- click [here](https://developers.google.com/maps/documentation/javascript/tutorial)
+
+* Tabulator- click [here](http://tabulator.info/docs/4.7)
 ---
 
 ## Code spotlight

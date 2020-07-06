@@ -1,14 +1,18 @@
-$(document).ready(function () {
+$(document).ready(function() {
     //this onclick event does the following: 
     //build user'address into a var for the googleAPI and will return a coordinate
     //store the user's geolocation into local storage
     //move to the next page; food-category
 
-    $("#feelingHangryBtn").on("click", function (event) {
+    $("#feelingHangryBtn").on("click", function(event) {
         event.preventDefault();
         var userAddressInput = $("#address-input").val().toLowerCase().split(",");
         console.log(userAddressInput);
         validateForm();
+
+        function buildUserAdrress() {
+            return encodeURI(userAddressInput)
+        };
 
         function validateForm() {
             if (userAddressInput == "") {
@@ -18,8 +22,7 @@ $(document).ready(function () {
                     button: "Ok"
                 });
                 return false;
-            }
-            else {
+            } else {
                 buildUserAdrress()
                 fetchLocation(buildUserAdrress())
                 window.open(href = "food-category.html");
@@ -32,9 +35,7 @@ $(document).ready(function () {
 
         // window.open(href = "food-category.html");
         // window.close();
-        function buildUserAdrress() {
-            return encodeURI(userAddressInput)
-        };
+
 
     });
 
@@ -46,19 +47,18 @@ $(document).ready(function () {
 
     //this on-click event will update and store the user's food category in local storage under the object userChoices
     //the click will also direct to next pg user-input.html
-    $("#foodCategoryBtn").on("click", function () {
+    $("#foodCategoryBtn").on("click", function() {
         // foodCategory = $("#food").val().trim();
 
         localStorage.setItem("foodCategory", JSON.stringify($("#food").val().trim()));
         var test = localStorage.getItem("foodCategory");
         console.log(test)
         window.open(href = "user-input.html")
-        // window.close();
+            // window.close();
     });
 
 
-    var questionsArr = [
-        {
+    var questionsArr = [{
             q: "How far are you willing to travel ?",
             choice1: "1 mile",
             choice2: "5 miles",
@@ -84,7 +84,7 @@ $(document).ready(function () {
     displayQuestion();
 
     //ask and store the options in local storage userChoices
-    $(".button").on("click", function () {
+    $(".button").on("click", function() {
         var userData = $(this).text();
         console.log(userData);
 
@@ -116,6 +116,7 @@ $(document).ready(function () {
 
     //the ajax call to maps to retrive geolocation
     var geolocation = {};
+
     function fetchLocation(address) {
         //Maps API
         var APIKey = "AIzaSyD7kU7_vg6aswMOMvwHXDLYbPSgNs9Am6k"
@@ -124,7 +125,7 @@ $(document).ready(function () {
             url: mapsURL,
             method: "GET"
 
-        }).then(function (response) {
+        }).then(function(response) {
             console.log(response);
             if (response.status !== "OK") {
                 swal({
@@ -158,7 +159,7 @@ $(document).ready(function () {
         // console.log(foodCategory)
         //when !category is entered, an error is logged onto console with the value "ERR_NAME_NOT_RESOLVED"
         var userInputSaved = JSON.parse(localStorage.getItem("userChoices"))
-        // console.log(userInputSaved)
+            // console.log(userInputSaved)
         var radius = parseInt(userInputSaved[0]) * 1609;
         // console.log(radius)
         var price = 0;
@@ -176,7 +177,7 @@ $(document).ready(function () {
             }
         };
         convertPrice()
-        // console.log(price);
+            // console.log(price);
 
         var deliveryOptions = userInputSaved[2];
         console.log(deliveryOptions)
@@ -190,7 +191,7 @@ $(document).ready(function () {
             },
             method: 'GET',
             dataType: 'json',
-            success: function (data) {
+            success: function(data) {
                 console.log(data);
                 localStorage.setItem("business-information", JSON.stringify(data.businesses));
 
@@ -202,63 +203,97 @@ $(document).ready(function () {
     var businessInfoArray = JSON.parse(localStorage.getItem("business-information"))
     console.log(businessInfoArray);
     // console.log(businessInfoArray[0].image_url)
-    var random = businessInfoArray[Math.floor(Math.random() * 11)]
-    console.log(random)
+    var randomRestaurant = businessInfoArray[Math.floor(Math.random() * 11)]
+    console.log(randomRestaurant)
 
-    for (var i = 0; i < 10; i++) {
-        businessName = businessInfoArray[i].name;
-        businessPhone = businessInfoArray[i].display_phone;
-        businessAddress = businessInfoArray[i].location.display_address;
-        businessImg = businessInfoArray[i].image_url;
-        businessRating = businessInfoArray[i].rating;
-        businessMap = businessInfoArray[i].coordinates.latitude;
-        businessMap2 = businessInfoArray[i].coordinates.longitude;
-    }
-    $(".name").append(businessName);
-    $(".image").append($("<img>").attr("src", businessImg))
-    $(".location").append(businessAddress);
-    $(".phone").append(businessPhone);
-    $(".rating").append(businessRating);
+    $(".name").append(randomRestaurant.name);
+
+    $(".price").append(randomRestaurant.price);
+
+    $(".phone").append(randomRestaurant.display_phone);
+
+    $(".location").append(randomRestaurant.location);
+
+    $(".rating").append(randomRestaurant.rating);
+
+    $(".delivery").append(randomRestaurant.transactions)
+
+    $(".restImage").append($("<img>").attr("src", randomRestaurant.image_url))
+
+
+    var businessList = [businessInfoArray[0], businessInfoArray[1], businessInfoArray[2]]
+
+
+
+    $("#option").on("click", function() { //pointing to the button 
+        var queryURL = "https://api.giphy.com/v1/gifs/random?api_key=wslWpWhssAgYDK6zVXacBDsacT47flr4&tag=mutombo"; //direct to URL
+        console.log(queryURL)
+
+        var table = new Tabulator("#food-table", {
+            data: businessList,
+            reactiveDate: true,
+            height: "311px",
+            layout: "fitDataTable",
+            columns: [
+                { title: "Name", field: "name" },
+                { title: "Phone #", field: "display_phone" },
+                { title: "Address", field: "location.display_address" },
+                { title: "Rating", field: "rating" },
+                { title: "Price", field: "price" }
+
+            ]
+        });
+
+        $.ajax({
+                url: queryURL,
+                method: "GET"
+            })
+            .then(function(response) {
+                var imageUrl = response.data.image_original_url;
+                var mutomboImage = $("<img>");
+                mutomboImage.attr("src", imageUrl);
+                mutomboImage.attr("alt", "mutombo image");
+
+                $("#images").prepend(mutomboImage);
+
+                setTimeout(function() {
+                    mutomboImage.remove()
+                }, 3000);
+
+                // var businessInfoArray = JSON.parse(localStorage.getItem("business-information"))
+                var businessMap = randomRestaurant.coordinates.latitude;
+
+                var businessMap2 = bandomRestaurant.coordinates.longitude;
+                // $(".lMap").append(businessMap);
+                // $(".lMap2").append(businessMap2);
+            });
+        console.log(businessMap)
+    });
+
+    var businessMap = randomRestaurant.coordinates.latitude;
+
+    var businessMap2 = randomRestaurant.coordinates.longitude;
+
+
     $(".lMap").append(businessMap);
     $(".lMap2").append(businessMap2);
 
 
     L.mapquest.key = 'vuIBY9eRy3TwF0eJSyhT4gJWCEQSAB5m';
-    L.mapquest.map('map', {
+    var food = L.mapquest.map('map', {
         center: [businessMap, businessMap2],
         layers: L.mapquest.tileLayer("map"),
         zoom: 12,
     });
+    console.log(businessMap)
+    console.log(businessMap2)
+
     // add a marker if possible.
 
-    $("#map").append(L.mapquest);
+    $("#map").append(food);
 
-    $(".lMap").hide();
-    $(".lMap2").hide();
+    // $(".lMap").hide();
+    // $(".lMap2").hide();
 
     // console.log(L.marker)
-});
-
-$("#option").on("click", function () { //pointing to the button 
-    var queryURL = "https://api.giphy.com/v1/gifs/random?api_key=wslWpWhssAgYDK6zVXacBDsacT47flr4&tag=mutombo"; //direct to URL
-    console.log(queryURL)
-    $.ajax({
-        url: queryURL,
-        method: "GET"
-    })
-        .then(function (response) {
-            var imageUrl = response.data.image_original_url;
-            var mutomboImage = $("<img>");
-            mutomboImage.attr("src", imageUrl);
-            mutomboImage.attr("alt", "mutombo image");
-            $("#name").text("name")
-            $("#location").text("location")
-            $("#phone").text("Phone")
-            $("#images").prepend(mutomboImage);
-            // $("#myTable").append(businessName);
-            // $("#myTable").append(businessAddress);
-            // $("#myTable").append(businessPhone);
-            var businessInfoArray = JSON.parse(localStorage.getItem("business-information"))
-        });
-
 });

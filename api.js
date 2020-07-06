@@ -1,10 +1,10 @@
-$(document).ready(function () {
+$(document).ready(function() {
     //this onclick event does the following: 
     //build user'address into a var for the googleAPI and will return a coordinate
     //store the user's geolocation into local storage
     //move to the next page; food-category
 
-    $("#feelingHangryBtn").on("click", function (event) {
+    $("#feelingHangryBtn").on("click", function(event) {
         event.preventDefault();
         var userAddressInput = $("#address-input").val().toLowerCase().split(",");
         console.log(userAddressInput);
@@ -18,8 +18,7 @@ $(document).ready(function () {
                     button: "Ok"
                 });
                 return false;
-            }
-            else {
+            } else {
                 buildUserAdrress()
                 fetchLocation(buildUserAdrress())
                 window.open(href = "food-category.html");
@@ -46,19 +45,18 @@ $(document).ready(function () {
 
     //this on-click event will update and store the user's food category in local storage under the object userChoices
     //the click will also direct to next pg user-input.html
-    $("#foodCategoryBtn").on("click", function () {
+    $("#foodCategoryBtn").on("click", function() {
         // foodCategory = $("#food").val().trim();
 
         localStorage.setItem("foodCategory", JSON.stringify($("#food").val().trim()));
         var test = localStorage.getItem("foodCategory");
         console.log(test)
         window.open(href = "user-input.html")
-        // window.close();
+            // window.close();
     });
 
 
-    var questionsArr = [
-        {
+    var questionsArr = [{
             q: "How far are you willing to travel ?",
             choice1: "1 mile",
             choice2: "5 miles",
@@ -84,7 +82,7 @@ $(document).ready(function () {
     displayQuestion();
 
     //ask and store the options in local storage userChoices
-    $(".button").on("click", function () {
+    $(".button").on("click", function() {
         var userData = $(this).text();
         console.log(userData);
 
@@ -116,6 +114,7 @@ $(document).ready(function () {
 
     //the ajax call to maps to retrive geolocation
     var geolocation = {};
+
     function fetchLocation(address) {
         //Maps API
         var APIKey = "AIzaSyD7kU7_vg6aswMOMvwHXDLYbPSgNs9Am6k"
@@ -124,7 +123,7 @@ $(document).ready(function () {
             url: mapsURL,
             method: "GET"
 
-        }).then(function (response) {
+        }).then(function(response) {
             console.log(response);
             if (response.status !== "OK") {
                 swal({
@@ -158,7 +157,7 @@ $(document).ready(function () {
         // console.log(foodCategory)
         //when !category is entered, an error is logged onto console with the value "ERR_NAME_NOT_RESOLVED"
         var userInputSaved = JSON.parse(localStorage.getItem("userChoices"))
-        // console.log(userInputSaved)
+            // console.log(userInputSaved)
         var radius = parseInt(userInputSaved[0]) * 1609;
         // console.log(radius)
         var price = 0;
@@ -176,7 +175,7 @@ $(document).ready(function () {
             }
         };
         convertPrice()
-        // console.log(price);
+            // console.log(price);
 
         var deliveryOptions = userInputSaved[2];
         console.log(deliveryOptions)
@@ -190,7 +189,7 @@ $(document).ready(function () {
             },
             method: 'GET',
             dataType: 'json',
-            success: function (data) {
+            success: function(data) {
                 console.log(data);
                 localStorage.setItem("business-information", JSON.stringify(data.businesses));
 
@@ -239,14 +238,14 @@ $(document).ready(function () {
     // console.log(L.marker)
 });
 
-$("#option").on("click", function () { //pointing to the button 
+$("#option").on("click", function() { //pointing to the button 
     var queryURL = "https://api.giphy.com/v1/gifs/random?api_key=wslWpWhssAgYDK6zVXacBDsacT47flr4&tag=mutombo"; //direct to URL
     console.log(queryURL)
     $.ajax({
-        url: queryURL,
-        method: "GET"
-    })
-        .then(function (response) {
+            url: queryURL,
+            method: "GET"
+        })
+        .then(function(response) {
             var imageUrl = response.data.image_original_url;
             var mutomboImage = $("<img>");
             mutomboImage.attr("src", imageUrl);

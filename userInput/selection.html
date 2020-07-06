@@ -5,8 +5,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Compiling info</title>
+    <script src="https://api.mqcdn.com/sdk/mapquest-js/v1.3.2/mapquest.js"></script>
+    <link type="text/css" rel="stylesheet" href="https://api.mqcdn.com/sdk/mapquest-js/v1.3.2/mapquest.css" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.0/css/bulma.min.css">
-    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
@@ -16,29 +17,90 @@
                 <img src=Logo-sm.PNG alt=logo>
             </div>
         </div>
-    </section>
-    <section>
         <div class="container">
-            <h1>You're eating at...[name, address logo, etc.]</h1>
+            <h1>You're eating...</h1>
         </div>
         </div>
-    </section>
-    <section>
-        <div class="containerFood container has-text-centered">
-            <img class=foodPic src="hf-bg-3.jpg" alt="food">
         </div>
-    </section>
-    <section>
-        <div class="moreOptions container has-text-centered">
-            <a class="button is-info" id="page6btn" href=page7.html>More Options</a>
+
+        <div class="container is-fluid">
+            <div class="tile is-ancestor">
+                <div class="tile is-vertical is-8">
+                    <div class="tile">
+                        <div class="tile is-parent is-vertical">
+                            <article class="tile is-child notification is-primary">
+                                <p class="title">You'll go here</p>
+                                <p class="name">Name of restaurant: </p>
+                                <p class="phone">Phone number: </p>
+                                <p class="location">Location: </p>
+                                <p class="rating">Rating: </p>
+                                <p class=lMap>What</p>
+                                <p class=lMap2>What2</p>
+                            </article>
+                        </div>
+                        <div class="tile is-parent">
+                            <article class="tile is-child notification is-info">
+                                <p class="title">Look so good</p>
+                                <figure class="image is-4by3">
+                                </figure>
+                            </article>
+                        </div>
+                    </div>
+                </div>
+                <div class="tile is-parent">
+                    <article class="tile is-child notification is-success">
+                        <div class="content">
+                            <p class="title">Map</p>
+                            <p id="map" class="image is-4by3"></p>
+                            <div class="content">
+                                <button id=option class="button is-info is-rounded ">Other option</button>
+                            </div>
+
+                        </div>
+                    </article>
+                </div>
+            </div>
         </div>
+        <div class="tile is-parent is-12">
+            <article class="tile is-child">
+                <p class="title"></p>
+                <p class="subtitle"></p>
+                <div class="content">
+                    <div id=images></div>
+                    <table id="myTable">
+                        <tr>
+                            <th id="names"></th>
+                            <th id="location"></th>
+                            <th id="phone"></th>
+                        </tr>
+                        <tr>
+                            <td class="names"></td>
+                            <td class="locations"></td>
+                            <td class="phones"></td>
+                        </tr>
+                        <tr>
+                            <td class="names2"></td>
+                            <td class="locations2"></td>
+                            <td class="phones2"></td>
+                        </tr>
+                        <tr>
+                            <td class="names3"></td>
+                            <td class="locations3"></td>
+                            <td class="phones3"></td>
+                        </tr>
+                    </table>
+                </div>
+
+
     </section>
 
 
-
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
-    <script type="text/javascript" src="userInput.js"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+    <script src="../api.js"></script>
+
+
 </body>
 
 </html>

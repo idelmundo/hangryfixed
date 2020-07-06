@@ -86,12 +86,12 @@ The code snippet below does the following:
 - [Link to LinkedIn](https://www.linkedin.com/in/mai-banh-311ba6164/)
 
 **Joe Davis**
-- [Link to Github](https://github.com/mtbanh)
-- [Link to LinkedIn](https://www.linkedin.com/in/mai-banh-311ba6164/)
+- [Link to Github](https://github.com/jdavis3333)
+- [Link to LinkedIn](https://www.linkedin.com/in/joe-davis-a8380232/)
 
 **Isaias Del Mundo**
-- [Link to Github](https://github.com/mtbanh)
-- [Link to LinkedIn](https://www.linkedin.com/in/mai-banh-311ba6164/)
+- [Link to Github](https://github.com/idelmundo)
+- [Link to LinkedIn](https://www.linkedin.com/in/isaiasdelmundo/)
 
 See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
 

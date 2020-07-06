@@ -16,3 +16,56 @@ h1 {
 .table_wrapper {
     overflow-x: auto;
 }
+
+body, html {
+  background-color: #342628;
+  height: 100%;
+  background-size: cover;
+  font-family: 'Teko', sans-serif;
+  font-size: 28px;
+  margin: 0;
+  color: #FEAA00;
+}
+  /* color: #FBFAE6; */
+
+/* .bg {
+  height: 100%;
+  background-size: cover;
+} */
+
+.choice-container {
+  padding: 5px;
+  margin: 8px;
+  border: 2px;
+}
+
+.parent {
+  text-align: center;
+  padding: 10px;
+  /* margin-left: 10px;
+  margin-right: 10px; */
+}
+
+.ancestor {
+  margin-left: 30px;
+  margin-right: 30px;
+}
+
+.help {
+  font-size: 20px;
+}
+
+.hero-body {
+  margin-bottom: 0px;
+  margin-top: 0px;
+  padding-bottom: 0px;
+}
+
+img {
+  border: .25rem solid black;
+}
+
+.button {
+  background-color: #FD8D6E;
+  color:  white;
+}

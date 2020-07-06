@@ -58,3 +58,5 @@ $("#option").on("click", function() { //pointing to the button
                         // $("#myTable").append(businessAddress);
                         // $("#myTable").append(businessPhone);
                         var businessInfoArray = JSON.parse(localStorage.getItem("business-information"))
+
+                        

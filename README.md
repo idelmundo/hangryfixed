@@ -69,6 +69,50 @@ The code snippet below does the following:
         };
 
 }
+
+## Code spotligth II 
+
+-Create a random selection for the user to eat at
+-Create a on click function they don't like the place
+-Create a list of restaurant using tabulator. 
+-Show a gif when they select other option and have it disapear for 4 seconds.
+
+$("#option").on("click", function() { //pointing to the button 
+        var queryURL = "https://api.giphy.com/v1/gifs/random?api_key=wslWpWhssAgYDK6zVXacBDsacT47flr4&tag=mutombo"; //direct to URL
+        console.log(queryURL)
+
+        var table = new Tabulator("#food-table", {
+            data: businessList,
+            reactiveDate: true,
+            height: "311px",
+            layout: "fitDataTable",
+            columns: [
+                { title: "Name", field: "name" },
+                { title: "Phone #", field: "display_phone" },
+                { title: "Address", field: "location.display_address" },
+                { title: "Rating", field: "rating" },
+                { title: "Price", field: "price" }
+
+            ]
+        });
+
+        $.ajax({
+                url: queryURL,
+                method: "GET"
+            })
+            .then(function(response) {
+                var imageUrl = response.data.image_original_url;
+                var mutomboImage = $("<img>");
+                mutomboImage.attr("src", imageUrl);
+                mutomboImage.attr("alt", "mutombo image");
+
+                $("#images").prepend(mutomboImage);
+
+                setTimeout(function() {
+                    mutomboImage.remove()
+                }, 3000);
+
+    });
 ```
 ## Demo
 
